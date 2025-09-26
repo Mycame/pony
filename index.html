@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零知识证明身份验证系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>零知识证明身份验证系统</h1>
+            <p>基于默克尔树的隐私保护身份验证</p>
+        </header>
+
+        <div class="main-content">
+            <div class="section">
+                <h2>系统初始化</h2>
+                <div class="form-group">
+                    <label for="userCount">用户数量:</label>
+                    <input type="number" id="userCount" value="8" min="2" max="32">
+                    <button id="initSystem">初始化系统</button>
+                </div>
+                <div id="systemStatus" class="status-box"></div>
+            </div>
+
+            <div class="section">
+                <h2>用户身份验证</h2>
+                <div class="form-group">
+                    <label for="userSelect">选择用户身份:</label>
+                    <select id="userSelect">
+                        <option value="">请先初始化系统</option>
+                    </select>
+                    <button id="generateProof">生成零知识证明</button>
+                </div>
+                <div id="proofResult" class="status-box"></div>
+            </div>
+
+            <div class="section">
+                <h2>证明验证</h2>
+                <div class="form-group">
+                    <button id="verifyProof">验证证明</button>
+                </div>
+                <div id="verificationResult" class="status-box"></div>
+            </div>
+
+            <div class="section">
+                <h2>默克尔树可视化</h2>
+                <div id="merkleTreeViz" class="tree-container"></div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>系统原理说明</h3>
+            <div class="principle-box">
+                <h4>1. 默克尔树构建</h4>
+                <p>将所有用户的公钥哈希值作为叶子节点构建默克尔树，树根代表整个用户集合。</p>
+                
+                <h4>2. 零知识证明</h4>
+                <p>用户提供从其叶子节点到根节点的路径证明，无需暴露具体的公钥值。</p>
+                
+                <h4>3. 验证过程</h4>
+                <p>验证者使用提供的路径和哈希值重新计算根节点，与已知根节点比较。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="crypto-utils.js"></script>
+    <script src="merkle-tree.js"></script>
+    <script src="zk-proof.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
